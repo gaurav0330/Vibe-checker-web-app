@@ -201,7 +201,7 @@ export default function AiGenerateForm() {
                 }}
               >
                 <option value="scored">Scored Quiz - Has right/wrong answers</option>
-                <option value="vibe">Vibe Check - No right/wrong answers, analyzes personality</option>
+                <option value="vibe">Personality Check - No right/wrong answers, analyzes personality</option>
               </select>
             </div>
             

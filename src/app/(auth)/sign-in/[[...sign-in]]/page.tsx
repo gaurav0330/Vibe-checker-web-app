@@ -1,37 +1,45 @@
-"use client";
+'use client';
 
 import { SignIn } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
+import { motion } from "@/lib/motion";
 
 export default function SignInPage() {
   return (
-    <div className="flex h-screen items-center justify-center bg-black">
-      <div className="w-full max-w-md">
+    <div className="flex h-screen items-center justify-center bg-gradient-to-br from-[#0e0b1f] to-[#130f3f]">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-md px-4"
+      >
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-blue-400 mb-2">Vibe Check</h1>
-          <p className="text-white">Sign in to continue</p>
+          <h1 className="text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-[#ff41ff] via-[#8b00ff] to-[#4dd0e1] mb-2">
+            Vibe Check
+          </h1>
+          <p className="text-[#b1b9ff]">Sign in to create and join quizzes</p>
         </div>
-        
+
         <SignIn
           appearance={{
-            baseTheme: dark,
             elements: {
               rootBox: "mx-auto",
-              card: "bg-gray-900 shadow-2xl border border-blue-500/30",
-              formButtonPrimary: "bg-blue-600 hover:bg-blue-700 text-white",
-              formFieldInput: "bg-gray-800 border-blue-500/50 text-white",
-              formFieldLabel: "text-blue-300",
-              headerTitle: "text-white",
-              headerSubtitle: "text-blue-200",
-              socialButtonsBlockButton: "border-blue-500/30 bg-gray-800 hover:bg-gray-700",
-              socialButtonsBlockButtonText: "text-white",
-              dividerLine: "bg-blue-500/30",
-              dividerText: "text-white",
-              footerActionLink: "text-blue-300 hover:text-blue-200"
-            }
+              card: "bg-[#1a133e] shadow-lg border border-[#8b00ff]/30 backdrop-blur-md rounded-xl",
+              headerTitle: "text-[#e0e6ff]",
+              headerSubtitle: "text-[#b1b9ff]",
+              formButtonPrimary:
+                "bg-gradient-to-r from-[#8b00ff] to-[#4dd0e1] hover:from-[#651fff] hover:to-[#00c8f8] text-white font-semibold rounded-lg",
+              socialButtonsBlockButton:
+                "bg-[#2a1a4a] border border-[#4dd0e1]/40 hover:bg-[#37006b]/30 text-[#e0e6ff]",
+              socialButtonsBlockButtonText: "text-[#e0e6ff]",
+              formFieldInput:
+                "bg-[#2a1a4a] border border-[#651fff]/50 text-[#e0e6ff] placeholder:text-[#7779a6]",
+              formFieldLabel: "text-[#bb8aff]",
+              footer: "text-[#7779a6]",
+              footerActionLink: "text-[#8b00ff] hover:text-[#e0e6ff]",
+            },
           }}
         />
-      </div>
+      </motion.div>
     </div>
   );
-} 
+}
