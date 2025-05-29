@@ -1,5 +1,6 @@
 "use client";
 
+import {colors} from "../../../../theme"
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
@@ -147,7 +148,7 @@ export default function AiGenerateForm() {
   }
   
   return (
-    <motion.div
+   <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -157,7 +158,7 @@ export default function AiGenerateForm() {
         <Card className="max-w-lg mx-auto">
           <CardHeader>
             <div className="flex items-center gap-2">
-              <Wand2 className="h-5 w-5 text-blue-400" />
+              <Wand2 className="h-5 w-5" style={{ color: colors.gradientVia }} />
             <CardTitle className="text-xl">Generate Quiz with AI</CardTitle>
             </div>
             <CardDescription>
@@ -166,13 +167,13 @@ export default function AiGenerateForm() {
           </CardHeader>
           <CardContent className="space-y-4">
             {error && (
-              <div className="p-3 rounded-md bg-red-900/30 border border-red-500/30 text-red-300">
-                {error}
+              <div className="p-3 rounded-md" style={{ backgroundColor: colors.cardBgError, borderColor: colors.cardBorderError, borderWidth: '1px' }}>
+                <span style={{ color: colors.errorIconColor }}>{error}</span>
               </div>
             )}
             
             <div className="space-y-2">
-              <Label htmlFor="topic" className="text-white">Quiz Topic</Label>
+              <Label htmlFor="topic" style={{ color: colors.textPrimary }}>Quiz Topic</Label>
               <Input 
                 id="topic" 
                 name="topic"
@@ -184,13 +185,20 @@ export default function AiGenerateForm() {
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="quizType" className="text-white">Quiz Type</Label>
+              <Label htmlFor="quizType" style={{ color: colors.textPrimary }}>Quiz Type</Label>
               <select 
                 id="quizType" 
                 name="quizType"
                 value={formData.quizType}
                 onChange={handleInputChange}
-                className="w-full bg-gray-800 border border-blue-500/30 text-white rounded-md px-3 py-2 focus:border-blue-500/50 focus-visible:outline-none focus-visible:ring-blue-500/20 focus-visible:ring-[3px]"
+                className="w-full rounded-md px-3 py-2 focus-visible:outline-none focus-visible:ring-[3px]"
+                style={{ 
+                  backgroundColor: colors.cardBg, 
+                  borderColor: colors.gradientVia, 
+                  color: colors.textPrimary,
+                  borderWidth: '1px',
+        
+                }}
               >
                 <option value="scored">Scored Quiz - Has right/wrong answers</option>
                 <option value="vibe">Vibe Check - No right/wrong answers, analyzes personality</option>
@@ -198,13 +206,20 @@ export default function AiGenerateForm() {
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="numQuestions" className="text-white">Number of Questions</Label>
+              <Label htmlFor="numQuestions" style={{ color: colors.textPrimary }}>Number of Questions</Label>
               <select 
                 id="numQuestions" 
                 name="numQuestions"
                 value={formData.numQuestions}
                 onChange={handleInputChange}
-                className="w-full bg-gray-800 border border-blue-500/30 text-white rounded-md px-3 py-2 focus:border-blue-500/50 focus-visible:outline-none focus-visible:ring-blue-500/20 focus-visible:ring-[3px]"
+                className="w-full rounded-md px-3 py-2 focus-visible:outline-none focus-visible:ring-[3px]"
+                style={{ 
+                  backgroundColor: colors.cardBg, 
+                  borderColor: colors.gradientVia, 
+                  color: colors.textPrimary,
+                  borderWidth: '1px',
+    
+                }}
               >
                 <option value="5">5 Questions</option>
                 <option value="10">10 Questions</option>
@@ -213,13 +228,20 @@ export default function AiGenerateForm() {
               </select>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="difficulty" className="text-white">Difficulty Level</Label>
+              <Label htmlFor="difficulty" style={{ color: colors.textPrimary }}>Difficulty Level</Label>
               <select 
                 id="difficulty" 
                 name="difficulty"
                 value={formData.difficulty}
                 onChange={handleInputChange}
-                className="w-full bg-gray-800 border border-blue-500/30 text-white rounded-md px-3 py-2 focus:border-blue-500/50 focus-visible:outline-none focus-visible:ring-blue-500/20 focus-visible:ring-[3px]"
+                className="w-full rounded-md px-3 py-2 focus-visible:outline-none focus-visible:ring-[3px]"
+                style={{ 
+                  backgroundColor: colors.cardBg, 
+                  borderColor: colors.gradientVia, 
+                  color: colors.textPrimary,
+                  borderWidth: '1px',
+
+                }}
               >
                 <option value="easy">Easy</option>
                 <option value="medium">Medium</option>
@@ -227,13 +249,20 @@ export default function AiGenerateForm() {
               </select>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="visibility" className="text-white">Visibility</Label>
+              <Label htmlFor="visibility" style={{ color: colors.textPrimary }}>Visibility</Label>
               <select 
                 id="visibility" 
                 name="visibility"
                 value={formData.visibility}
                 onChange={handleInputChange}
-                className="w-full bg-gray-800 border border-blue-500/30 text-white rounded-md px-3 py-2 focus:border-blue-500/50 focus-visible:outline-none focus-visible:ring-blue-500/20 focus-visible:ring-[3px]"
+                className="w-full rounded-md px-3 py-2 focus-visible:outline-none focus-visible:ring-[3px]"
+                style={{ 
+                  backgroundColor: colors.cardBg, 
+                  borderColor: colors.gradientVia, 
+                  color: colors.textPrimary,
+                  borderWidth: '1px',
+
+                }}
               >
                 <option value="private">Private - Only accessible with link</option>
                 <option value="public">Public - Listed in public quizzes</option>
@@ -252,17 +281,18 @@ export default function AiGenerateForm() {
             </Button>
             <Button 
               type="submit" 
-              className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto order-1 sm:order-2"
+              className="w-full sm:w-auto order-1 sm:order-2"
               disabled={isLoading}
+              style={{ backgroundColor: colors.buttonPrimaryFrom, color: colors.textPrimary }}
             >
               {formData.quizType === "vibe" ? (
                 <>
-                  <Sparkles className="h-4 w-4 mr-2" />
+                  <Sparkles className="h-4 w-4 mr-2" style={{ color: colors.textPrimary }} />
                   Generate Vibe Check
                 </>
               ) : (
                 <>
-                  <Wand2 className="h-4 w-4 mr-2" />
+                  <Wand2 className="h-4 w-4 mr-2" style={{ color: colors.textPrimary }} />
                   Generate Quiz
                 </>
               )}
