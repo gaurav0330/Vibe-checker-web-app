@@ -224,10 +224,10 @@ export default function Home() {
               <li>
                 Phone:{" "}
                 <a
-                  href="tel:+1234567890"
+                  href="tel:+918709610659"
                   className="hover:text-[#e0e6ff] transition"
                 >
-                  +1 (234) 567-890
+                  +91 8709610659
                 </a>
               </li>
             </ul>

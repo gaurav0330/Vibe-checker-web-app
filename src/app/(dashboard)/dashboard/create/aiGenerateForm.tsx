@@ -20,7 +20,7 @@ export default function AiGenerateForm() {
     numQuestions: "10",
     difficulty: "medium",
     visibility: "private",
-    quizType: "scored",
+    quizType: "vibe",
   });
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
