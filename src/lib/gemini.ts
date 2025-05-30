@@ -273,11 +273,10 @@ export async function generateVibeAnalysis(
           "enthusiasm": "high",
           "knowledge": "expert",
           "approach": "nostalgic"
-          // Add other relevant categories
         }
       }
       
-      DO NOT include any text before or after the JSON. Return ONLY the JSON.
+      IMPORTANT: Return ONLY valid JSON. Do not wrap it in markdown code blocks or include any other text.
     `;
     
     // Generate content from the model
@@ -289,33 +288,69 @@ export async function generateVibeAnalysis(
     const text = response.text ?? '';
     console.log("Raw Gemini response for vibe analysis:", text.substring(0, 200) + "...");
     
-    // Try direct parsing first
+    // Clean the response text by removing markdown code blocks and extra whitespace
+    const cleanedText = text
+      .replace(/```json\s*/g, '') // Remove ```json
+      .replace(/```\s*/g, '')     // Remove closing ```
+      .trim();
+    
+    console.log("Cleaned response:", cleanedText.substring(0, 200) + "...");
+    
+    // Try parsing the cleaned text
     try {
-      return JSON.parse(text) as VibeAnalysis;
-    } catch (parseError) {
-      console.error("Failed direct JSON parsing, trying to extract JSON:", parseError);
+      const parsed = JSON.parse(cleanedText) as VibeAnalysis;
       
-      // Extract JSON from the response
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
-      if (!jsonMatch) {
-        throw new Error("Failed to parse JSON from the Gemini response");
+      // Validate the parsed result has required fields
+      if (!parsed.vibeAnalysis) {
+        throw new Error("Missing vibeAnalysis field");
       }
       
-      try {
-        return JSON.parse(jsonMatch[0]) as VibeAnalysis;
-      } catch (secondParseError) {
-        console.error("Failed second JSON parsing attempt:", secondParseError);
-        
-        // Fallback to a simple analysis
+      return parsed;
+    } catch (parseError) {
+      console.error("Failed to parse cleaned JSON:", parseError);
+      
+      // Try to extract JSON using a more robust regex
+      const jsonMatch = cleanedText.match(/\{[\s\S]*?\}(?=\s*$)/);
+      if (jsonMatch) {
+        try {
+          const parsed = JSON.parse(jsonMatch[0]) as VibeAnalysis;
+          if (!parsed.vibeAnalysis) {
+            throw new Error("Missing vibeAnalysis field in extracted JSON");
+          }
+          return parsed;
+        } catch (secondParseError) {
+          console.error("Failed to parse extracted JSON:", secondParseError);
+        }
+      }
+      
+      // Last resort: try to find just the vibeAnalysis content
+      const vibeMatch = cleanedText.match(/"vibeAnalysis":\s*"([^"]+)"/);
+      if (vibeMatch) {
         return {
-          vibeAnalysis: "Based on your answers, you seem to have an interesting relationship with " + topic + ". Your vibe is unique and defies simple categorization!"
+          vibeAnalysis: vibeMatch[1],
+          vibeCategories: {
+            overall: "unique"
+          }
         };
       }
+      
+      // Ultimate fallback
+      return {
+        vibeAnalysis: `Based on your answers about ${topic}, you have a unique and interesting perspective! Your responses show a thoughtful approach that defies simple categorization.`,
+        vibeCategories: {
+          uniqueness: "high",
+          thoughtfulness: "evident"
+        }
+      };
     }
   } catch (error) {
+    console.error("Error in generateVibeAnalysis:", error);
     const errorMessage = handleAPIError(error);
     return {
-      vibeAnalysis: "We couldn't generate your vibe analysis at this time. Please try again later. Error: " + errorMessage
+      vibeAnalysis: `We couldn't generate your vibe analysis at this time. Please try again later. Error: ${errorMessage}`,
+      vibeCategories: {
+        status: "error"
+      }
     };
   }
-} 
+}
