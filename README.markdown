@@ -52,7 +52,7 @@ An AI-powered quiz platform that lets you create engaging quizzes instantly, unc
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/APSK22/vibe-check.git
+   git clone https://github.com/gaurav0330/vibe-checker-web-app.git
    cd vibe-check
    ```
 
