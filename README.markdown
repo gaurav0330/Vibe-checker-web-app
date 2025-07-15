@@ -136,8 +136,8 @@ This project is licensed under the [MIT License](LICENSE). See the LICENSE file 
 
 **Ayush Raj**
 
-- GitHub: [github.com/APSK22](https://github.com/ayush7662)
-- Email: [ajaypskulharia@gmail.com](mailto:kamalayush65@gmail.com)
+- GitHub: [gaurav0330](https://github.com/gaurav0330)
+- Email: [gauravjikar070806@gmail.com](mailto:gauravjikar070806@gmail.com)
 
 ## 🙌 Acknowledgments
 
