@@ -133,9 +133,6 @@ For help, open a GitHub issue with detailed logs and steps to reproduce.
 This project is licensed under the [MIT License](LICENSE). See the LICENSE file for details.
 
 ## 🧑‍💻 Author
-
-**Ayush Raj**
-
 - GitHub: [gaurav0330](https://github.com/gaurav0330)
 - Email: [gauravjikar070806@gmail.com](mailto:gauravjikar070806@gmail.com)
 
